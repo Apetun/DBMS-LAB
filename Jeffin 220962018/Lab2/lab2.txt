@@ -1,0 +1,60 @@
+create table Employee(EmpNo numeric(2),
+EmpName varchar(20),
+Gender varchar(20),
+Salary numeric (6,2),
+Address varchar(30),
+Dno numeric(2));
+
+create table Department(DeptNo numeric(2),
+DeptName varchar(20),
+Location varchar(20));
+
+alter table Employee add constraint primkey_Employee primary key(EmpNo);
+
+alter table Employee modify EmpName varchar(20) not null;
+alter table Employee modify Gender varchar(20) not null;
+alter table Employee modify Salary numeric (6,2) not null;
+alter table Employee modify Address varchar(30) not null;
+
+alter table Employee add constraint check_gender check(Gender in ('M','F'));
+
+alter table Department add constraint primkey_Department primary key(DeptNo);
+alter table Department add constraint check_DeptName unique(DeptName);
+
+alter table Employee add constraint fk_emp foreign key(DNo) references Department(DeptNo);
+
+insert into Department values(1,'CSE','AB5');
+insert into Department values(2,'AIML','AB5');
+insert into Department values(3,'IT','AB5');
+insert into Department values(4,'CCE','AB5');
+insert into Department values(5,'ECE','AB5');
+
+select * from Department;
+
+insert into Employee values(1,'A','M',1234.56,'Manipal',1);
+insert into Employee values(2,'B','F',2234.16,'Udupi',2);
+insert into Employee values(3,'C','M',6431.56,'Bengaluru',2);
+insert into Employee values(4,'D','M',4534.56,'Mangalore',3);
+insert into Employee values(5,'E','F',8294.56,'Manipal',5);" 
+
+select * from Employee;
+
+insert into Employee values(6,'F','Male',1234.56,'Manipal',1);
+insert into Employee values(6,'F','M',null,'Manipal',1);
+insert into Employee values(6,'F','M',1234.56,'Manipal',6);
+
+delete from Department where DeptNo=2;
+
+alter table Employee drop constraint fk_emp;
+alter table Employee add constraint del_dep foreign key(DNo) references department(DeptNo) on delete cascade;
+
+alter table Employee modify Salary numeric(7,2) default(10000.0);
+
+rename department to department1;
+@"C:\Users\ugcse.PG-CP.000\Desktop\Jeffin 220962018\Lab2\University.sql"
+@"C:\Users\ugcse.PG-CP.000\Desktop\Jeffin 220962018\Lab2\smallRelations.sql"
+
+select name,dept_name from Student;
+
+select name from instructor where dept_name = 'Comp. Sci.';
+select title from course where dept_name = 'Comp. Sci.' and credits=3;
